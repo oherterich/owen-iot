@@ -7,11 +7,35 @@
 	</head>
 	<body>
 		<div id="main">
-		<div id="controls" class="controls-hidden">
-			<h1>Start</h1>
-		</div>
+			<div id="controls" class="controls-hidden">
+				<h1>Start</h1>
+			</div>
+			<div id="create" class="create-visible">
+				<input type="text" placeholder="Your Name">
+			</div>
+			<div id="playerlist">
+				<table>
+					<tr>
+						<th>Player</th>
+						<th>Score</th>
+					</tr>
+					<!--<tr>
+						<td>Owen</td>
+						<td>12</td>
+					</tr>
+					<tr>
+						<td>Billy</td>
+						<td>4</td>
+					</tr>
+					<tr>
+						<td>Dragon Face</td>
+						<td>44</td>
+					</tr>-->
+				</table>
+			</div>
 		</div>
 		<script src="js/node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js"></script>
+		<script src="js/main.js"></script>
 		<script src="js/nodeClient.js"></script>
 	</body>
 </html>

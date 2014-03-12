@@ -9,23 +9,30 @@ var io = socket.listen( server );
 
 var players = [];
 
-var Player = function( client, id, score ) {
+var Player = function( client, id, name, score ) {
 	this.client = client;
 	this.id = id;
+	this.name = name;
 	this.score = score;
 }
 
 io.sockets.on( 'connection', function( client ) {
 
-	if ( players.length < 1 ) {
-		client.emit( 'controls', { message: "You are the leader!" } );
+	client.emit('id', { id: client.id });
+
+	for (var i = 0; i < players.length; i++) {
+		client.emit('new player', { id: players[i].id, name: players[i].name, color: players[i].color });
 	}
 
-	players.push( new Player( client, client.id, 0 ) );
+	client.on('new player info', function (data) {
+		if ( players.length < 1 ) {
+			client.emit( 'controls', { message: "You are the leader!" } );
+		}
 
-	client.broadcast.emit( 'new user', { id: client.id });
+		players.push( new Player( client, client.id, data.name, 0 ) );
+		client.broadcast.emit( 'new player', { id: client.id, name: data.name, color: data.color });
+	});
 
-	client.emit('init', { message: "OMG IT WORKS!" } );
 
 	client.on('click', function (data) {
 		for ( var i = 0; i < players.length; i++ ) {
