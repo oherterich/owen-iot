@@ -8,6 +8,7 @@ var server = http.createServer( app );
 var io = socket.listen( server );
 
 var players = [];
+var bGameStarted = false;
 
 var Player = function( client, id, name, score ) {
 	this.client = client;
@@ -26,21 +27,29 @@ io.sockets.on( 'connection', function( client ) {
 
 	client.on('new player info', function (data) {
 		if ( players.length < 1 ) {
-			client.emit( 'controls', { message: "You are the leader!" } );
+			client.emit( 'controls on', { message: "You are the leader!" } );
 		}
 
 		players.push( new Player( client, client.id, data.name, 0 ) );
 		client.broadcast.emit( 'new player', { id: client.id, name: data.name, color: data.color });
 	});
 
-
 	client.on('click', function (data) {
-		for ( var i = 0; i < players.length; i++ ) {
-			if ( players[i].id == client.id ) {
-				players[i].score++;
+		if ( bGameStarted ) {
+
+			for ( var i = 0; i < players.length; i++ ) {
+				if ( players[i].id == client.id ) {
+					players[i].score++;
+					client.broadcast.emit( 'point', { id: players[i].id, name: players[i].name });
+				}
 			}
-			console.log( players[i].id + " | " + players[i].score );
+			console.log("clicked!");
 		}
+	});
+
+	client.on( 'begin game', function() {
+		bGameStarted = true;
+		client.emit('controls off');
 	});
 
 	client.on('disconnect', function (data) {

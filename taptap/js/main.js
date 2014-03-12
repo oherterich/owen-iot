@@ -21,24 +21,30 @@ var turnOnControls = function() {
 	controls.classList.add('controls-visible');
 }
 
+var turnOffControls = function() {
+	controls.classList.remove('controls-visible');
+	controls.classList.add('controls-hidden');	
+}
+
 var removeCreate = function() {
 	create.classList.remove('create-visible');
 	create.classList.add('create-hidden');
 }
 
 var createPlayer = function( id, name, color, score ) {
-	var p = new Player( id, name, color, score );
-	players.push( p );
-
 	var row = document.createElement("tr");
+	row.id = "player" + players.length;
 	
 	var playerName = document.createElement("td");
 	playerName.innerHTML = name;
 	row.appendChild( playerName );
 
-	var score = document.createElement("td");
-	score.innerHTML = 0;
-	row.appendChild( score );
+	var playerScore = document.createElement("td");
+	playerScore.innerHTML = 0;
+	row.appendChild( playerScore );
 
 	playerTable.appendChild(row);
+
+	var p = new Player( id, name, color, score );
+	players.push( p );
 }
