@@ -15,8 +15,6 @@ html, body {
 	bottom: 10%;
 	left: 20%;
 	width: 60%;
-	background-color: #111;
-	color: #EEE;
 	text-align: center;
 	margin: 0 auto;
 	padding: 5% 1%;
@@ -39,6 +37,26 @@ html, body {
 
 .controls-visible {
 	display: relative;
+}
+
+.controls-ready {
+	background-color: #111;
+	color: #EEE;
+}
+
+.controls-waiting {
+	background-color: #666;
+	color: #EEE;
+}
+
+#newplayer {
+	position: absolute;
+	top: 10%;
+	left: 20%;
+	width: 60%;
+	font-size: 0.8rem;
+	color: #fff;
+	text-align: center;
 }
 
 #create {
@@ -74,8 +92,6 @@ html, body {
 #playerlist {
 	width: 50%;
 	position: absolute;
-	top: 5%;
-	left: 25%;
 }
 
 table {
@@ -98,3 +114,52 @@ table td {
 	font-size: 1.0rem;
 	letter-spacing: 0.05rem;
 }
+
+.playerlist-hidden {
+	top: -9999px;
+	left: -9999px;
+}
+
+.playerlist-visible {
+	top: 5%;
+	left: 25%;
+}
+
+#ready h1 {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.ready-visible {
+	width: 60%;
+	position: absolute;
+	bottom: 40%;
+	left: 20%;
+
+	border-radius: 8px;
+	padding: 5% 1%;
+
+	cursor: pointer;
+	text-align: center;
+}
+
+.ready-hidden {
+	position: absolute;
+	bottom: -9999px;
+	left: -9999px;
+}
+
+.ready-true {
+	background: #3DBF11;
+	color: #F3F5C6;
+}
+
+.ready-false {
+ 	background: #C41212;
+ 	color: #F3F5C6;
+}
+

@@ -9,12 +9,14 @@ var io = socket.listen( server );
 
 var players = [];
 var bGameStarted = false;
+var numReady = 0;
 
-var Player = function( client, id, name, score ) {
+var Player = function( client, id, name, score) {
 	this.client = client;
 	this.id = id;
 	this.name = name;
 	this.score = score;
+	this.ready = false;
 }
 
 io.sockets.on( 'connection', function( client ) {
@@ -47,9 +49,31 @@ io.sockets.on( 'connection', function( client ) {
 		}
 	});
 
+	client.on( 'ready', function ( data ) {
+		for (var i = 0; i < players.length; i++) {
+			if ( players[i].id == client.id ) {
+				players[i].ready = data.ready;
+				if (data.ready) numReady++;
+				else numReady--;
+			}
+		}
+
+		if ( numReady < players.length ) {
+			players[0].client.emit('waiting for players');
+			console.log("not ready!");
+		}
+		else {
+			players[0].client.emit('players ready');
+			console.log("ready!");
+		}
+	});
+
 	client.on( 'begin game', function() {
-		bGameStarted = true;
-		client.emit('controls off');
+		if ( numReady == players.length) {
+			bGameStarted = true;
+			io.sockets.emit('begin game');
+			client.emit('controls off');
+		}
 	});
 
 	client.on('disconnect', function (data) {
