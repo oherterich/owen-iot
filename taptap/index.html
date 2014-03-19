@@ -13,7 +13,8 @@
 			<div id="newplayer">
 			</div>
 			<div id="create" class="create-visible">
-				<input type="text" placeholder="Your Name">
+					<input type="text" placeholder="Your Name">
+					<input type="submit" id="submit">
 			</div>
 			<div id="ready" class="ready-hidden ready-false">
 				<h1>Ready</h1>
@@ -24,20 +25,12 @@
 						<th>Player</th>
 						<th>Score</th>
 					</tr>
-					<!--<tr>
-						<td>Owen</td>
-						<td>12</td>
-					</tr>
-					<tr>
-						<td>Billy</td>
-						<td>4</td>
-					</tr>
-					<tr>
-						<td>Dragon Face</td>
-						<td>44</td>
-					</tr>-->
 				</table>
 			</div>
+			<audio id="explosion" style="display: none;">
+				<source src="assets/explosion.mp3" type="audio/mpeg">
+				<source src="assets/explosion.ogg" type="audio/ogg">
+			</audio>
 		</div>
 		<script src="js/node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js"></script>
 		<script src="js/main.js"></script>

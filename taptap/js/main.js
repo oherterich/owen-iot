@@ -2,6 +2,7 @@ var main = document.getElementById("main");
 var controls = document.getElementById("controls");
 var newPlayer = document.getElementById("newplayer");
 var create = document.getElementById("create");
+var submit = document.getElementById("submit");
 var playerList = document.getElementById("playerlist");
 var playerTable = document.getElementById("playerlist").childNodes[1];
 var ready = document.getElementById("ready");
@@ -10,7 +11,18 @@ var id;
 var bGameStarted = false;
 var players = [];
 
-var color = '#'+Math.floor(Math.random()*16777215).toString(16);
+var maxTaps = 10;
+var maxBlink = 2000;
+var blink;
+var startColor, endColor, switchColor;
+var duration = 1000000000;
+
+var explosion = document.getElementById("explosion");
+
+var red = Math.floor(Math.random()*190);
+var green = Math.floor(Math.random()*190);
+var blue = Math.floor(Math.random()*190);
+var color = "rgb(" + red + "," + green + "," + blue + ")";
 main.style.background = color;
 
 var Player = function( id, name, color, score) {
@@ -78,3 +90,30 @@ var createPlayer = function( id, name, color, score ) {
 	var p = new Player( id, name, color, score );
 	players.push( p );
 }
+
+//Color interpolation function | Created by p11y
+//Found here: http://stackoverflow.com/questions/11292649/javascript-color-animation
+lerp = function(a, b, u) {
+    return (1 - u) * a + u * b;
+};
+
+fade = function(element, property, start, end, duration) {
+	console.log("start fade!");
+    var interval = 10;
+    var steps = duration / interval;
+    var step_u = 1.0 / steps;
+    var u = 0.0;
+    var theInterval = setInterval(function() {
+        if (u >= 1.0) {
+            clearInterval(theInterval);
+            switchColor = !switchColor;
+            	console.log("end fade!");
+        }
+        var r = Math.round(lerp(start.r, end.r, u));
+        var g = Math.round(lerp(start.g, end.g, u));
+        var b = Math.round(lerp(start.b, end.b, u));
+        var colorname = 'rgb(' + r + ',' + g + ',' + b + ')';
+        element.style.setProperty(property, colorname);
+        u += step_u;
+    }, interval);
+};

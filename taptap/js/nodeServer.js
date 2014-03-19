@@ -60,11 +60,9 @@ io.sockets.on( 'connection', function( client ) {
 
 		if ( numReady < players.length ) {
 			players[0].client.emit('waiting for players');
-			console.log("not ready!");
 		}
 		else {
 			players[0].client.emit('players ready');
-			console.log("ready!");
 		}
 	});
 
@@ -81,7 +79,11 @@ io.sockets.on( 'connection', function( client ) {
 		for ( var i = 0; i < players.length; i++ ) {
 			if ( players[i].id == client.id ) {
 				players.splice(i, 1);
-				players[0].client.emit('controls', { message: "You are now the leader!" } ); 
+
+				if (players.length > 0) {
+					players[0].client.emit('controls', { message: "You are now the leader!" } ); 
+				}
+					
 			}
 		}
 	});	

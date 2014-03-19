@@ -51,11 +51,47 @@ socket.on('point', function ( data ) {
 	}
 });
 
-main.addEventListener('click', function(evt) {
+main.addEventListener('mousedown', function(evt) {
 	if ( bGameStarted ) {
 		socket.emit( 'click', { message: 'I just clicked!' });
 		players[0].score++;
 		document.getElementById('player0').childNodes[1].innerHTML = players[0].score;
+
+
+		duration = (1 - (players[0].score / maxTaps)) * 1000;
+		console.log(duration);
+
+		window.clearInterval(blink);
+		blink = setInterval( function() {
+
+			if ( switchColor ) {
+				startColor = { r: 255, g: 255, b: 255 };
+				endColor = { r: red, g: green, b: blue };
+			}
+			else {
+				startColor = { r: red, g: green, b: blue };
+				endColor = { r: 255, g: 255, b: 255 };
+			}
+
+			console.log("new fade!");
+
+			fade( main, 'background', startColor, endColor, duration);
+		},  duration);
+
+		//duration = (1 - (players[0].score / maxTaps)) * 1000;
+
+
+		explosion.play();
+	}
+});
+
+main.addEventListener('touchstart', function(evt) {
+	if ( bGameStarted ) {
+		socket.emit( 'click', { message: 'I just clicked!' });
+		players[0].score++;
+		document.getElementById('player0').childNodes[1].innerHTML = players[0].score;
+
+		explosion.play();
 	}
 });
 
@@ -72,6 +108,17 @@ create.addEventListener('keydown', function(evt) {
 		addReady();
 	}
 });
+
+submit.addEventListener('click', function(evt) {
+	evt.preventDefault();
+	evt.stopPropagation();
+
+	var input = document.querySelector("input");
+	socket.emit( 'new player info', { name: input.value, color: main.style.background });
+
+	removeCreate();
+	addReady();
+})
 
 ready.addEventListener('click', function(evt) {
 	toggleReady();
