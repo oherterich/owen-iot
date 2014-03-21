@@ -17,6 +17,7 @@ socket.on('new player', function ( data ) {
 socket.on('controls on', function ( data ) {
 	turnOnControls();
 	addReady();
+	console.log( data.message );
 });
 
 //Turns off controls, mostly for the "leader".
@@ -190,4 +191,14 @@ socket.on( 'wrong password', function( data ) {
 
 socket.on( 'joined room', function( data ) {
 	addReady();
+});
+
+socket.on( 'player left', function( data ) {
+	var rows = document.getElementsByClassName('player-row');
+	for (var i = 0; i < rows.length; i++) {
+		if ( rows[i].childNodes[0].innerHTML == data.name ) {
+			var thisPlayer = rows[i];
+			thisPlayer.parentNode.removeChild( thisPlayer );
+		}
+	}
 });

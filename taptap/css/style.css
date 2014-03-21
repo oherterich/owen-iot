@@ -215,6 +215,14 @@ table td {
     left: 20%;
     margin: 3% 25%;
     padding: 10% 0; }
+  #password-box #password-back {
+    text-align: center;
+    width: 100%;
+    margin: 5% 2%;
+    padding: 3%;
+    color: #eee;
+    font-size: 1.3rem;
+    cursor: pointer; }
   #password-box p {
     text-align: center;
     color: #f00; }

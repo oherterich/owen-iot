@@ -11,8 +11,10 @@ var joinRoom = document.getElementById("join-room");
 var createRoom = document.getElementById("create-room");
 var joinRoom = document.getElementById("join-room");
 var passwordBox = document.getElementById("password-box");
+var passwordBack = document.getElementById("password-back");
 var submitPassword = document.getElementById("password-submit");
 var submitRoom = document.getElementById("submit-newroom");
+var selectedRoom;
 var bIsReady = false;
 var id;
 var bGameStarted = false;
@@ -100,10 +102,16 @@ var removePassword = function() {
 	passwordBox.classList.remove('password-visible');
 }
 
+passwordBack.addEventListener('click', function(evt) {
+	removePassword();
+	addRoom();
+});
+
 //Function that creates a new player and adds it to the array.
 var addPlayer = function( id, name, color, score ) {
 	var row = document.createElement("tr");
 	row.id = "player" + players.length;
+	row.classList.add( "player-row");
 	
 	var playerName = document.createElement("td");
 	playerName.innerHTML = name;

@@ -99,7 +99,6 @@ io.sockets.on( 'connection', function( client ) {
 	});
 
 	client.on( 'ready', function ( data ) {
-		console.log("huh");
 		client.ready = data.ready;
 
 		for (var i = 0; i < rooms.length; i++) {
@@ -130,19 +129,24 @@ io.sockets.on( 'connection', function( client ) {
 		}
 	});
 
-	// client.on('disconnect', function (data) {
-	// 	console.log(client.id + " has disconnected!");
-	// 	for ( var i = 0; i < players.length; i++ ) {
-	// 		if ( players[i].id == client.id ) {
-	// 			players.splice(i, 1);
+	client.on('disconnect', function (data) {
+		console.log(client.id + " has disconnected!");
+		for (var i = 0; i < rooms.length; i++) {
+			if ( client.room == rooms[i].name ) {
+				for ( var j = 0; j < rooms[i].players.length; j++ ) {
+					if ( client.id == rooms[i].players[j].id ) {
+						client.broadcast.to(rooms[i].name).emit( 'player left', { id: client.id, name: client.name });
+						rooms[i].players.splice( j, 1 );
+						if (rooms[i].players.length > 0 && rooms[i].bGameStarted == false) {
+							rooms[i].players[0].emit('controls on', { message: "You are now the leader!" } );
+						}
+					}
+				}
+			}
 
-	// 			if (players.length > 0) {
-	// 				players[0].client.emit('controls', { message: "You are now the leader!" } ); 
-	// 			}
-					
-	// 		}
-	// 	}
-	// });	
+
+		}
+	});	
 });
 
 server.listen( 8080 );
