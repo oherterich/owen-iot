@@ -23,7 +23,7 @@ var Player = function( client, id, name, score) {
 var Room = function( name, password ) {
 	this.name = name;
 	this.password = password;
-	this.bIsGameStarted = false;
+	this.bGameStarted = false;
 	this.players = [];
 	this.numReady = 0;
 }
@@ -35,6 +35,7 @@ io.sockets.on( 'connection', function( client ) {
 
 	client.on( 'new room', function( data ) {
 		client.join( data.name );
+		client.room = data.name;
 
 		var r = new Room( data.name, data.password );
 		r.players.push( client );
@@ -48,16 +49,17 @@ io.sockets.on( 'connection', function( client ) {
 		for (var i = 0; i < rooms.length; i++) {
 			if ( rooms[i].name == data.roomname ) {
 				if ( rooms[i].password == data.password ) {
-					client.join( data.name );
-					client.room = data.name;
+					client.join( data.roomname );
+					client.room = data.roomname;
+
+					for (var j = 0; j < rooms[i].players.length; j++) {
+						client.emit('new player', { id: rooms[i].players[j].id, name: rooms[i].players[j].name, color: rooms[i].players[j].color });
+					}
+
 					rooms[i].players.push( client );
 
 					client.emit( 'joined room' );
 					client.broadcast.to(rooms[i].name).emit( 'new player', { id: client.id, name: client.name, color: client.color });
-
-					for (var j = 0; j < players.length; j++) {
-						client.emit('new player', { id: players[j].id, name: players[j].name, color: players[j].color });
-					}
 				}
 				else {
 					client.emit('wrong password');
@@ -65,12 +67,6 @@ io.sockets.on( 'connection', function( client ) {
 			}
 		}
 	});
-
-
-
-
-
-
 
 	client.on('new player info', function (data) {
 		players.push( new Player( client, client.id, data.name, 0 ) );
@@ -81,28 +77,33 @@ io.sockets.on( 'connection', function( client ) {
 		client.color = data.color;
 
 		for (var i = 0; i < rooms.length; i++) {
-			client.emit( 'room-list', { name: rooms[i].name } );
+			if ( rooms[i].bGameStarted == false ) {
+				client.emit( 'room-list', { name: rooms[i].name } );
+			}
 		}
 	});
 
-	// client.on('click', function (data) {
-	// 	if ( bGameStarted ) {
-
-	// 		for ( var i = 0; i < players.length; i++ ) {
-	// 			if ( players[i].id == client.id ) {
-	// 				players[i].score++;
-	// 				client.broadcast.emit( 'point', { id: players[i].id, name: players[i].name });
-	// 			}
-	// 		}
-	// 		console.log("clicked!");
-	// 	}
-	// });
+	client.on('click', function (data) {
+		for (var i = 0; i < rooms.length; i++) {
+			if ( client.room == rooms[i].name ) {
+				if ( rooms[i].bGameStarted ) {
+					for ( var j = 0; j < rooms[i].players.length; j++ ) {
+						if ( rooms[i].players[j].id == client.id ) {
+							rooms[i].players[j].score++;
+							client.broadcast.to(rooms[i].name).emit( 'point', { id: rooms[i].players[j].id, name: rooms[i].players[j].name });
+						}
+					}
+				}
+			}
+		}
+	});
 
 	client.on( 'ready', function ( data ) {
+		console.log("huh");
 		client.ready = data.ready;
 
 		for (var i = 0; i < rooms.length; i++) {
-			if ( client.room = rooms[i].name ) {
+			if ( client.room == rooms[i].name ) {
 				if (data.ready) rooms[i].numReady++;
 					else rooms[i].numReady--;
 
@@ -121,9 +122,9 @@ io.sockets.on( 'connection', function( client ) {
 			if ( client.room == rooms[i].name ) {
 				if ( rooms[i].numReady == rooms[i].players.length) {
 					rooms[i].bGameStarted = true;
-					client.broadcast.to(rooms[i].name).emit('begin game');
+					io.sockets.in(rooms[i].name).emit('begin game');
 					client.emit('controls off');
-					client.emit('begin game');
+					client.broadcast.emit('remove room', { name: client.room });
 				}
 			}
 		}

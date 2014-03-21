@@ -30,7 +30,6 @@ socket.on('begin game', function() {
 	addPlayerList();
 	removeReady();
 	newPlayer.innerHTML = "";
-	console.log('begin!');
 });
 
 //If we are still waiting, we can't start yet.
@@ -161,6 +160,18 @@ socket.on( 'room-list', function( data ) {
 	});
 
 	joinRoom.appendChild( room );
+});
+
+socket.on( 'remove room', function( data ) {
+	var rooms = document.getElementsByClassName('current-room');
+	for ( var i = 0; i < rooms.length; i++ ) {
+		if ( rooms[i].innerHTML == data.name ) {
+			rooms[i].parentNode.removeChild( rooms[i] );
+			console.log("removed " + data.name);
+		}
+	}
+
+	console.log("received the remove command");
 });
 
 submitPassword.addEventListener( 'click', function(evt) {
