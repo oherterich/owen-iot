@@ -1,11 +1,18 @@
 var main = document.getElementById("main");
 var controls = document.getElementById("controls");
 var newPlayer = document.getElementById("newplayer");
-var create = document.getElementById("create");
-var submit = document.getElementById("submit");
+var createPlayer = document.getElementById("create-player");
+var submitName = document.getElementById("submit-name");
 var playerList = document.getElementById("playerlist");
 var playerTable = document.getElementById("playerlist").childNodes[1];
 var ready = document.getElementById("ready");
+var room = document.getElementById("room");
+var joinRoom = document.getElementById("join-room");
+var createRoom = document.getElementById("create-room");
+var joinRoom = document.getElementById("join-room");
+var passwordBox = document.getElementById("password-box");
+var submitPassword = document.getElementById("password-submit");
+var submitRoom = document.getElementById("submit-newroom");
 var bIsReady = false;
 var id;
 var bGameStarted = false;
@@ -42,9 +49,9 @@ var turnOffControls = function() {
 	controls.classList.add('controls-hidden');	
 }
 
-var removeCreate = function() {
-	create.classList.remove('create-visible');
-	create.classList.add('create-hidden');
+var removeCreatePlayer = function() {
+	createPlayer.classList.remove('createPlayer-visible');
+	createPlayer.classList.add('createPlayer-hidden');
 }
 
 var addPlayerList = function() {
@@ -73,7 +80,28 @@ var toggleReady = function() {
 	bIsReady = !bIsReady;
 }
 
-var createPlayer = function( id, name, color, score ) {
+var addRoom = function() {
+	room.classList.add('room-visible');
+	room.classList.remove('room-hidden');
+}
+
+var removeRoom = function() {
+	room.classList.add('room-hidden');
+	room.classList.remove('room-visible');
+}
+
+var addPassword = function() {
+	passwordBox.classList.add('password-visible');
+	passwordBox.classList.remove('password-hidden');
+}
+
+var removePassword = function() {
+	passwordBox.classList.add('password-hidden');
+	passwordBox.classList.remove('password-visible');
+}
+
+//Function that creates a new player and adds it to the array.
+var addPlayer = function( id, name, color, score ) {
 	var row = document.createElement("tr");
 	row.id = "player" + players.length;
 	

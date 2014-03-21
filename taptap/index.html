@@ -12,9 +12,26 @@
 			</div>
 			<div id="newplayer">
 			</div>
-			<div id="create" class="create-visible">
+			<div id="create-player" class="createPlayer-visible">
 					<input type="text" placeholder="Your Name">
-					<input type="submit" id="submit">
+					<input type="submit" id="submit-name">
+			</div>
+			<div id="room" class="room-hidden">
+				<div id="join-room">
+					<h2>Join room</h2>
+				</div>
+				<div id="create-room">
+					<h2>Create room</h2>
+					<div id="room-form" class="room-form-hidden">
+						<input type="text" placeholder="Enter a room name." id="roomname">
+						<input type="text" placeholder="Enter a password." id="password">
+						<input type="submit" id="submit-newroom">
+					</div>
+				</div>
+			</div>
+			<div id="password-box" class="password-hidden">
+				<input type="password" placeholder="Please enter the password." id="password-input">
+				<input type="submit" id="password-submit">
 			</div>
 			<div id="ready" class="ready-hidden ready-false">
 				<h1>Ready</h1>
