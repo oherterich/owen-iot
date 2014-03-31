@@ -1,4 +1,4 @@
-var socket = io.connect( 'http://localhost:8080' ); //Connect to socket.io
+var socket = io.connect( 'http://isharethereforeiam.com:8080' ); //Connect to socket.io
 
 //We just want to know our id so that we can add ourselves to the player list.
 socket.on('id', function (data) {

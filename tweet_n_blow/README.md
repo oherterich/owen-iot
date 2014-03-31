@@ -1,0 +1,5 @@
+## Tweet 'n Blow (working title)
+
+This project is an installation that takes various pieces of technology: social media, creative coding, and physical sensors, and combines them to create a sense of magic or wonder. The installation will consist of a pedestal with a cube on top, and a projection on a wall. The user is invited to blow into the cube, which will directly affect both what is being displayed on screen and the cube itself, which will glow. The screen will display various tweets about the project, sourced directly from Twitter.
+
+If you softly blow on the cube, a soft light will emanate from the cube and the letters on the screen with gently rustle about. Blow harder, however, and you move the letters about and light up the cube even more. If you blow hard enough, you will trigger a reaction in the visuals that will change the tweet completely.
