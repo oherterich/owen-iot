@@ -19,9 +19,11 @@ down.addEventListener('click', function(evt) {
 left.addEventListener('click', function(evt) {
 	evt.preventDefault();
 	socket.emit( 'left' );
+	console.log('left');
 });
 
 right.addEventListener('click', function(evt) {
 	evt.preventDefault();
 	socket.emit( 'right' );
+	console.log('right');
 });

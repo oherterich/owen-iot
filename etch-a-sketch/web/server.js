@@ -46,11 +46,29 @@ io.sockets.on('connection', function (client) {
 
 	client.on( 'up', function() {
 		value = 0x01;
+		console.log(value);
+		console.log('up');
 		serial.write( new Buffer([value]) );
 	});
 
 	client.on( 'down', function() {
 		value = 0x00;
+		console.log(value);
+		console.log('down');
+		serial.write( new Buffer([value]) );
+	});
+
+	client.on( 'left', function() {
+		value = 0x10;
+		console.log(value);
+		console.log('left');
+		serial.write( new Buffer([value]) );
+	});
+
+	client.on( 'right', function() {
+		value = 0x11;
+		console.log(value);
+		console.log('right');
 		serial.write( new Buffer([value]) );
 	});
 
