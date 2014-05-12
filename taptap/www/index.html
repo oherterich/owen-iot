@@ -1,0 +1,66 @@
+<!doctype HTML>
+<html>
+	<head>
+		<title>TapTap</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no" />
+		<link href="css/style.css" rel="stylesheet" type="text/css">
+		<link href='http://fonts.googleapis.com/css?family=Nunito:400,700' rel='stylesheet' type='text/css'>
+	</head>
+	<body>
+		<div id="main">
+			<div id="controls" class="controls-hidden controls-waiting">
+				<h1>Waiting</h1>
+			</div>
+			<div id="newplayer">
+			</div>
+			<div id="create-player" class="createPlayer-visible">
+					<input type="text">
+					<h2>Enter your name.</h2>
+					<input type="submit" id="submit-name" value="start">
+			</div>
+			<div id="room" class="room-hidden">
+				<div id="create-room" class="create-visible">
+					<h2 id="create-room-button">Create a room</h2>
+					<div id="room-form" class="room-form-hidden">
+						<input type="text" placeholder="Room name" id="roomname">
+						<input type="text" placeholder="Password" id="password">
+						<input type="submit" id="submit-newroom">
+					</div>
+				</div>
+				<h2 id="join-room-button">Join a room</h2>
+			</div>
+			<div id="join-room" class="join-hidden">
+					<h2>Pick a room.</h2>
+					<div id="arrowup"></div>
+					<div id="arrowdown"></div>
+					<div id="room-list"></div>
+					<h3 id="join-back">Back</h3>
+			</div>
+			<div id="password-box" class="password-hidden">
+				<h2>What's the password?</h2>
+				<input type="password" id="password-input">
+				<input type="submit" id="password-submit">
+				<p id="password-back">Back</p>
+			</div>
+			<div id="ready" class="ready-hidden ready-false">
+				<h1>Ready</h1>
+			</div>
+			<div id="playerlist" class="hidden player-active">
+				<table>
+					<tr>
+						<th>Player</th>
+						<th>Score</th>
+					</tr>
+				</table>
+				<h1 id="gameover" class="hidden">GAME OVER</h1>
+				<h1 id="youwin" class="hidden">YOU WIN</h1>
+			</div>
+			<div id="restart" class="hidden">
+				<h1>Restart</h1>
+			</div>
+		</div>
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="js/main.js"></script>
+		<script src="js/nodeClient.js"></script>
+	</body>
+</html>
