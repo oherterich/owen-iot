@@ -1,13 +1,57 @@
+<DOCTYPE!>
+
 <html>
+
 	<head>
-		<title>Etch-A-Sketch</title>
+		<title>Net A Sketch</title>
+		<link href="normalize.css" rel="stylesheet">
+		<link href="netasketch.css" rel="stylesheet">
 	</head>
+
 	<body>
-		<button id="up">UP</button>
-		<button id="down">DOWN</button>
-		<button id="left">LEFT</button>
-		<button id="right">RIGHT</button>
-		<script src="http://macaroni.local:9000/socket.io/socket.io.js"></script>
+		<div class="frame">
+
+			<div id="title">
+				<p>Magic</p>
+				<p id="sketch">Net - A - Sketch</p>
+				<p>Screen</p>
+			</div>
+
+			<div id="screen">
+				<iframe width="80%" height="80%" src="" seamless ></iframe>
+			</div>
+
+			<div id ="buttons">
+				<div class="alignleft">
+					<div class="arrows">
+						<div id="left" class="arrow-left"></div>
+					</div>
+					<div class="arrows">
+					<button class="round-button"</button>
+					</div>
+					<div class="arrows">
+						<div id="right" class="arrow-right"></div>
+					</div>
+				</div>
+  				<div class="alignright">
+  					<div class="arrows">
+  						<div class="arrows">
+							<div id="up" class="arrow-up"></div>
+						</div>
+						<div class="arrows">
+						<button class="round-button"</button>
+						</div>
+						<div class="arrows">
+							<div id="down" class="arrow-down"></div>
+						</div>
+					</div>
+  				</div>
+				
+			</div>
+		</div>
+		<script src="/socket.io/socket.io.js"></script>
 		<script src="js/client.js"></script>
 	</body>
+
 </html>
+

@@ -1,0 +1,104 @@
+.frame{
+	background-color: #d91f02;
+}
+
+#title{
+	height:30px;
+	width:600px;
+	margin: auto;
+}
+
+p{
+	float: right;
+    margin: 0px;
+    padding-top: 10px;
+    padding-right: 55px;
+   	font-family: Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+	font-size: 30px;
+	color: #fce771;
+}
+
+#sketch{
+	padding-bottom: 10px;
+	padding-left: 5px;
+	padding-right:55px;
+	font-family: "Brush Script MT", cursive;
+	font-size: 40px;
+	color: #fce771;
+}
+
+iframe{
+	display: block;
+	margin: auto;
+}
+
+#buttons{
+	height:60px;
+	width:90%;
+	margin: auto;
+	padding: 10px;
+}
+
+.arrows {
+	display:inline-block;
+	margin-right: 5px;
+	margin-left: 5px;
+}
+
+.alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}
+
+.round-button {
+    width:50px;
+    height:50px;
+    line-height:50px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 0 3px gray;
+}
+.round-button:hover {
+    background: #ffffff;
+}
+
+
+.arrow-up {
+	width: 0; 
+	height: 0; 
+	border-left: 20px solid transparent;
+	border-right: 20px solid transparent;
+	
+	border-bottom: 20px solid black;
+}
+
+.arrow-down {
+	width: 0; 
+	height: 0; 
+	border-left: 20px solid transparent;
+	border-right: 20px solid transparent;
+	
+	border-top: 20px solid black;
+}
+
+.arrow-right {
+	width: 0; 
+	height: 0; 
+	border-top: 20px solid transparent;
+	border-bottom: 20px solid transparent;
+	
+	border-left: 20px solid black;
+}
+
+.arrow-left {
+	width: 0; 
+	height: 0; 
+	border-top: 20px solid transparent;
+	border-bottom: 20px solid transparent; 
+	
+	border-right:20px solid black; 
+}
+

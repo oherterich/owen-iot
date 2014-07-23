@@ -42,16 +42,16 @@ void loop() {
 
     if ( incomingByte == 0x01 ) {
       //digitalWrite( outputPin, HIGH );
-      myMotor->step(stepAmount, FORWARD, SINGLE); 
+      myMotor->step(stepAmount, FORWARD, DOUBLE); 
     } 
     else if ( incomingByte == 0x00 ) {
-      myMotor->step(stepAmount, BACKWARD, SINGLE); 
+      myMotor->step(stepAmount, BACKWARD, DOUBLE); 
     }
     else if ( incomingByte == 0x10 ) {
-      myMotor2->step(stepAmount, FORWARD, SINGLE); 
+      myMotor2->step(stepAmount, FORWARD, DOUBLE); 
     }
     else if ( incomingByte == 0x11 ) {
-      myMotor2->step(stepAmount, BACKWARD, SINGLE); 
+      myMotor2->step(stepAmount, BACKWARD, DOUBLE); 
     }
   }  
 }

@@ -1,4 +1,6 @@
-var socket = io.connect('http://' + window.location.hostname + ':9000');
+//var socket = io.connect('http://isharethereforeiam.com:9000');
+//var socket = io.connect('http://localhost:9000');
+var socket = io.connect('http://' + window.location.hostname + ':9001');
 
 var up, down, left, right;
 up = document.getElementById('up');
